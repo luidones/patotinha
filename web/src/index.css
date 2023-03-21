@@ -1,0 +1,11 @@
+
+.map {
+    /* background-image: url(../public/sample.png);
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: 384px 384px; */
+}
+
+.toon > circle{
+    transition: all .15s;
+}
