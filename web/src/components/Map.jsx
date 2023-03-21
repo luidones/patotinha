@@ -119,7 +119,7 @@ function Map(props) {
 
     return (
         <svg className="map" viewBox={viewBox}>
-            <image x="-192" y="-192" width="384" height="384" href="/sample.png" />
+            <image x="-192" y="-192" width="384" height="384" href="/assets/default.png" />
             {/* {barriers} */}
             {toons}
             <Me size={map.size} x={0} y={0} triedToMove={triedToMove} />
