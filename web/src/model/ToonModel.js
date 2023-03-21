@@ -42,3 +42,29 @@ export const HairColors = {
     Red: 'red',
     White: 'white'
 };
+
+export const TopTypes = {
+    None: 'none',
+    BeachTop: {
+        key: 'beach_top',
+        hasVariance: true,
+        colors: {
+            Black: 'black',
+            Blue: 'blue',
+            Green: 'green',
+            Pink: 'pink',
+            Red: 'red',
+        }
+    },
+    ClassyTop: {
+        key: 'classy_top',
+        hasVariance: true,
+        colors: {
+            Beige: 'beige',
+            Black: 'black',
+            Grey: 'grey',
+            Navy: 'navy',
+            Wine: 'wine',
+        }
+    }
+}

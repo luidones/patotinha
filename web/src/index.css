@@ -2,18 +2,18 @@
     transition: all .15s;
 }
 
-.toonBuild .body { x: -12px; }
+.toonBuild .body image { x: -12px; }
 
-.toonBuild .body-down { y: -12px; }
-.toonBuild .body-left { y: -76px; }
-.toonBuild .body-right { y: -140px; }
-.toonBuild .body-up { y: -204px; }
+.toonBuild .body-down image { y: -12px; }
+.toonBuild .body-left image { y: -76px; }
+.toonBuild .body-right image { y: -140px; }
+.toonBuild .body-up image { y: -204px; }
 
 @keyframes toon-walking {
     from { x: -12px; }
     to { x: -204px; }
 }
 
-.toonBuild .body.walking {
+.toonBuild .body.walking image {
     animation: toon-walking .8s steps(4, jump-none) infinite;
 }
