@@ -8,7 +8,7 @@ function App() {
             <h1>hello!</h1>
             {/* <Map /> */}
             <svg className="toonBuild">
-                <Toon2 bodyType={BodyTypes.B}  bodyColor={BodyColors.Light} hairType={HairTypes.Type4} hairColor={HairColors.Ginger} />
+                <Toon2 bodyType={BodyTypes.A}  bodyColor={BodyColors.Light} hairType={HairTypes.Type5} hairColor={HairColors.Black} />
             </svg>
         </div>
     )

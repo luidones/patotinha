@@ -47,7 +47,7 @@ export default function Toon2(props) {
 
     return <svg viewBox="0 0 36 50" width={36} height={50} className={classNames}>
         { bodySprite }
-        { hairSprite }
         { topSprite }
+        { hairSprite }
     </svg>
 }
