@@ -17,3 +17,7 @@
 .toonBuild .body.walking image {
     animation: toon-walking .8s steps(4, jump-none) infinite;
 }
+
+video {
+    width: 150px;
+}
