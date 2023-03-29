@@ -1,44 +1,41 @@
-const redisLib = require('redis');
 const restifyLib = require('restify');
+const restifyCors = require('restify-cors-middleware2');
 const socketIOLib = require("socket.io");
+const { OAuth2Client: GoogleAuth } = require('google-auth-library');
 
-// const redis = redisLib.createClient();
-// redis.connect();
-// redis.on('error', err => console.log('Redis client error: ', err));
+const auth = new GoogleAuth();
+
+const cors = restifyCors({
+    origins: ['*'],
+    allowHeaders:['Authorization']
+});
 
 const server = restifyLib.createServer();
+server.pre(cors.preflight)
+server.use(cors.actual)
 server.use(restifyLib.plugins.bodyParser());
+server.use(async (req, res) => {
+    const idToken = (req.headers.authorization||'').split(' ')[1];
+    const token = await auth.verifyIdToken({ idToken })
+    req.user = token.getPayload();
+});
 
 const io = new socketIOLib.Server(server.server, {
     cors: { origin: '*', allowedHeaders: ["*"] }
 });
 
+io.use((socket, next) => {
+    const idToken = socket.handshake.auth.token;
+    auth.verifyIdToken({ idToken })
+        .then(token => {
+            socket.user = token.getPayload();
+            next();
+        })
+        .catch(e => next(new Error(e)));
+});
+
 io.on('connection', socket => {
-    socket.broadcast.emit('userEntered', { id: socket.id, x:0, y:0, d:0 });
-
-    socket.on('disconnect', () => {
-        socket.broadcast.emit('userDisconnected', { id: socket.id });
-    });
-
-    socket.on('userMoved', (position) => {
-        socket.broadcast.emit('userMoved', { id: socket.id, ...position });
-    });
-
-    socket.on('offer', data => {
-        socket.broadcast.emit('offered', data);
-    });
-
-    socket.on('answer', data => {
-        socket.broadcast.emit('answered', data);
-    });
-
-    socket.on('candidates', data => {
-        socket.broadcast.emit('candidates', data);
-    });
-
-    socket.on('candidate', data => {
-        socket.broadcast.emit('candidate', data);
-    });
+    
 });
 
 server.listen(8080, () => console.log('server is up at 8080'));

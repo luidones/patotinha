@@ -1,23 +1,94 @@
+html, body, #root, .home {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
 .map .toon > circle{
     transition: all .15s;
 }
 
-.toonBuild .body image { x: -12px; }
+video {
+    width: 150px;
+}
 
-.toonBuild .body-down image { y: -12px; }
-.toonBuild .body-left image { y: -76px; }
-.toonBuild .body-right image { y: -140px; }
-.toonBuild .body-up image { y: -204px; }
+/* -------------------------------------------------------------- */
+
+.home {
+    display: flex;
+}
+
+.home nav.menu {
+    background: #000;
+    width: 40px;
+}
+
+
+.profile {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    justify-content: center;
+}
+
+.profile .outfit {
+    display: flex;
+    gap: 10px;
+    width: 400px;
+}
+
+.profile .outfit .rotate {
+    cursor: pointer;
+    pointer-events: bounding-box;
+}
+
+.profile .properties {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    gap: 4px;
+}
+
+.profile .properties,
+.profile .properties select {
+    font-size: 12px;
+}
+
+.profile .properties div {
+    display: flex;
+    justify-content: space-between;
+}
+
+.profile .toon-builder {
+    border: 1px solid black;
+    border-radius: 10px;
+    height: 200px;
+    width: 160px;
+}
+
+.profile .name {
+    width: 160px;
+}
+
+
+
+/* ------------------ TOON ------------------ */
 
 @keyframes toon-walking {
     from { x: -12px; }
     to { x: -204px; }
 }
 
-.toonBuild .body.walking image {
+.toon image { x: -12px; }
+
+.toon.body-down image { y: -2px; }
+.toon.body-left image { y: -66px; }
+.toon.body-right image { y: -130px; }
+.toon.body-up image { y: -194px; }
+
+.toon.walking image {
     animation: toon-walking .8s steps(4, jump-none) infinite;
 }
 
-video {
-    width: 150px;
-}
+/* ------------------ /TOON ------------------ */

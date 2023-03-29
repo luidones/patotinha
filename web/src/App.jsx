@@ -1,31 +1,23 @@
-import Map from './components/Map';
-import Toon2 from './components/Toon2';
-import RTC from './components/RTC';
-import { BagTypes, BodyColors, BodyTypes, BottomTypes, HairColors, HairTypes, HatTypes, TopTypes } from "./model/ToonModel";
+import { useContext } from 'react';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { UserContext } from './contexts/UserContext';
+import Home from './components/Home';
+import SignIn from './components/SignIn';
+import Profile from './components/Profile';
 
-function App() {
-    return (
-        <div>
-            <h1>hello!</h1>
-            {/* <Map /> */}
-            {/* <svg className="toonBuild">
-                <Toon2
-                    bodyType={BodyTypes.A} 
-                    bodyColor={BodyColors.Light}
-                    hairType={HairTypes.Type8}
-                    hairColor={HairColors.Red}
-                    topType={TopTypes.ScarfShirt}
-                    topColor={TopTypes.ScarfShirt.colors.Blue}
-                    bottomType={BottomTypes.LongSkirt}
-                    bottomColor={BottomTypes.LongSkirt.colors.Pink}
-                    hatType={HatTypes.Cat}
-                    bagType={BagTypes.None}
-                />
-            </svg> */}
+export default function App(){
+    const [user] = useContext(UserContext);
 
-            {/* <RTC /> */}
-        </div>
-    )
-}
+    const router = createBrowserRouter([
+        {
+            path: "/",
+            element: <Home />,
+        },
+        {
+            path: "/profile",
+            element: <Profile />
+        } 
+    ]);
 
-export default App
+    return user ? <RouterProvider router={router}/> : <SignIn />;
+};

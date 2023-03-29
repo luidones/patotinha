@@ -1,90 +1,63 @@
 import { useEffect, useState } from "react";
+import { Directions, BagTypes, BodyColors, BodyTypes, BottomTypes, HairColors, HairTypes, HatTypes, TopTypes } from "../model/ToonModel";
 
-const TILE_SIZE = 32;
+export default function Toon(props) {
+    const [version, setVersion] = useState(0);
 
-const Directions = {
-    Up: 0,
-    Right: 1,
-    Down: 2,
-    Left: 3
-}
-
-export function Toon(props) {
-    const ox = props.size.x % 2 == 0 ? (TILE_SIZE / 2) : 0;
-    const oy = props.size.y % 2 == 0 ? (TILE_SIZE / 2) : 0;
-    let odx = 0, ody = 0;
-
-    if (props.d == Directions.Up) ody = -4;
-    if (props.d == Directions.Right) odx = 4;
-    if (props.d == Directions.Down) ody = 4;
-    if (props.d == Directions.Left) odx = -4;
-
-    const dx = props.x * TILE_SIZE + ox + odx;
-    const dy = props.y * TILE_SIZE + oy + ody;
-
-    const bx = props.x * TILE_SIZE + ox;
-    const by = props.y * TILE_SIZE + oy;
-
-    return <g className="toon">
-        <circle className="direction" cx={dx} cy={dy} r="8" />
-        <circle className="body" cx={bx} cy={by} r="10" />
-    </g>
-}
-
-export function Me(props) {
-    const [position, setPosition] = useState({
-        x: props.x || 0,
-        y: props.y || 0,
-        d: Directions.Down
-    });
-
-    const tryToMove = direction => {
-        const movement = {};
-
-        if (direction == position.d) {
-            if (direction == Directions.Up)
-                movement.y = position.y - 1;
-                
-            if (direction == Directions.Right)
-                movement.x = position.x + 1;
-
-            if (direction == Directions.Down)
-                movement.y = position.y + 1;
-
-            if (direction == Directions.Left)
-                movement.x = position.x - 1;
-        }
-
-        movement.d = direction;
-
-        const newPosition = Object.assign({}, position, movement);
-        const wasIEnabledToMove = props.triedToMove(newPosition);
-        
-        if (wasIEnabledToMove)
-            setPosition(newPosition);
+    const outfit = {
+        bodyType: props.bodyType || BodyTypes.A,
+        bodyColor: props.bodyColor || BodyColors.Dark,
+        hairType: props.hairType || HairTypes.Type1,
+        hairColor: props.hairColor || HairColors.Ginger,
+        topType: props.topType || TopTypes.Classy,
+        topColor: props.topColor || TopTypes.Classy.colors.Navy,
+        bottomType: props.bottomType || BottomTypes.Classy,
+        bottomColor: props.bottomColor || BottomTypes.Classy.colors.Navy,
+        hatType: props.hatType || HatTypes.None,
+        hatColor: props.hatColor,
+        bagType: props.bagType || BagTypes.SportyBackpack,
+        bagColor: props.bagColor || BagTypes.SportyBackpack.colors.Yellow
     }
 
-    const handleKeyDown = e => {
-        switch (e.keyCode) {
-            case 37:
-                tryToMove(Directions.Left);
-                break;
-            case 38:
-                tryToMove(Directions.Up);
-                break;
-            case 39:
-                tryToMove(Directions.Right);
-                break;
-            case 40:
-                tryToMove(Directions.Down);
-                break;
-        }
-    };
+    const direction = props.direction || Directions.Down;
+   
+    const classNames = `toon walking body-${direction}`;
 
-    useEffect(() => {
-        document.addEventListener('keydown', handleKeyDown);
-        return () => document.removeEventListener('keydown', handleKeyDown);
-    }, [position]);
+    const getSprite = (url) =>
+        <image height={256} width={256} preserveAspectRatio="xMidYMid slice" href={`/images/avatar/${url}`}/>;
+
+    const bodySprite = getSprite(`bodies/${outfit.bodyType}_${outfit.bodyColor}.png`);
+
+    const hairSprite = outfit.hairType != HairTypes.Bald
+                     ? getSprite(`hairs/${outfit.hairType}_${outfit.hairColor}.png`)
+                     : getSprite('empty.png');
+
+    const topVariance = outfit.topType.hasVariance ? `_${outfit.bodyType}` : '';
+    const topSprite = outfit.topType != TopTypes.None
+                    ? getSprite(`tops/${outfit.topType.key}${topVariance}_${outfit.topColor}.png`)
+                    : getSprite('empty.png');
     
-    return <Toon size={props.size} x={position.x} y={position.y} d={position.d} />
+    const bottomVariance = outfit.bottomType.hasVariance ? `_${outfit.bodyType}` : '';
+    const bottomSprite = outfit.bottomType != BottomTypes.None
+                       ? getSprite(`bottoms/${outfit.bottomType.key}${bottomVariance}_${outfit.bottomColor}.png`)
+                       : getSprite('empty.png');
+    
+    const hatColor = outfit.hatColor ? `_${outfit.hatColor}` : '';
+    const hatSprite = outfit.hatType != HatTypes.None
+                    ? getSprite(`hats/${outfit.hatType.key}${hatColor}.png`)
+                    : getSprite('empty.png');
+
+    const bagColor = outfit.bagColor ? `_${outfit.bagColor}` : '';
+    const bagSprite = outfit.bagType != HatTypes.None 
+                    ? getSprite(`bags/${outfit.bagType.key}${bagColor}.png`)
+                    : getSprite('empty.png');
+
+    return <svg viewBox="0 0 38 60" width={38} height={60} className={classNames} x={props.x || -19} y={props.y || -30}>
+        { bodySprite }
+        { bottomSprite }
+        { topSprite }
+        { bagSprite }
+        { hairSprite }
+        { hatSprite }
+    </svg>
 }
