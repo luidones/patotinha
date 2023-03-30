@@ -20,8 +20,9 @@ export default function Toon(props) {
     }
 
     const direction = props.direction || Directions.Down;
+    const walking = !!props.walking ? 'walking' : '';
    
-    const classNames = `toon walking body-${direction}`;
+    const classNames = `toon ${walking} body-${direction}`;
 
     const getSprite = (url) =>
         <image height={256} width={256} preserveAspectRatio="xMidYMid slice" href={`/images/avatar/${url}`}/>;

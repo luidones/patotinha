@@ -16,6 +16,7 @@ video {
 
 .home {
     display: flex;
+    overflow: hidden;
 }
 
 .home nav.menu {
@@ -88,7 +89,21 @@ video {
 .toon.body-up image { y: -194px; }
 
 .toon.walking image {
-    animation: toon-walking .8s steps(4, jump-none) infinite;
+    animation: toon-walking .8s steps(4, jump-none) -1s infinite;
 }
 
 /* ------------------ /TOON ------------------ */
+
+
+/* ------------------ MAP ------------------ */
+
+section.map {
+    flex: 1;
+}
+
+section.map svg image.bg,
+section.map svg image.fg {
+    transition: all .08s linear;
+}
+
+/* ------------------ /MAP ------------------ */

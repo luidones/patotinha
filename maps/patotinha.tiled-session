@@ -1,0 +1,75 @@
+{
+    "Map/SizeTest": {
+        "height": 4300,
+        "width": 2
+    },
+    "activeFile": "",
+    "expandedProjectPaths": [
+    ],
+    "fileStates": {
+        "ic_out.tmx": {
+            "scale": 0.75,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 103.33333333333337,
+                "y": 240
+            }
+        },
+        "magiscarf1.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "magiscarf2.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "magiscarf3.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "magiscarf4.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "magiscarf_out_1.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "magiscarf_out_2.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "magiscarf_out_3.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "magiscarf_out_4.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 3
+        }
+    },
+    "last.imagePath": "C:/Projects/POCS/patotinha/maps/tilesets",
+    "map.fixedSize": false,
+    "map.lastUsedFormat": "tmx",
+    "map.tileHeight": 16,
+    "map.tileWidth": 16,
+    "openFiles": [
+    ],
+    "project": "patotinha.tiled-project",
+    "recentFiles": [
+        "magiscarf_out_4.tsx",
+        "ic_out.tmx",
+        "magiscarf_out_1.tsx",
+        "magiscarf_out_2.tsx",
+        "magiscarf_out_3.tsx",
+        "magiscarf1.tsx",
+        "magiscarf2.tsx",
+        "magiscarf3.tsx",
+        "magiscarf4.tsx"
+    ],
+    "tileset.lastUsedFormat": "tsx",
+    "tileset.tileSize": {
+        "height": 16,
+        "width": 16
+    }
+}
